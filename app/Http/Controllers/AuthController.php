@@ -11,7 +11,7 @@ class AuthController extends Controller
     public function register(Request $request){
         $fields = $request->validate([
             "name" => "required|string",
-            "email" => "required|string|unique:user,email",
+            "email" => "required|string|unique:users,email",
             "password" => "required|string|confirmed",
             "role" => "required|integer"
         ]);
@@ -38,7 +38,7 @@ class AuthController extends Controller
     public function login(Request $request){
         $fields = $request->validate([
             'email' => 'required|string',
-            'password' => 'required'|'string',
+            'password' => 'required|string',
         ]);
         
         //check email
@@ -50,7 +50,7 @@ class AuthController extends Controller
             ], 401);
         }else{
             // ลบ token เก่าออกกาอน แล้วค่อยสร้างใหม่
-            $user->token()->delete();
+            $user->tokens()->delete();
             $token = $user->createToken($request->userAgent(), ["$user->role"])->plainTextToken;
 
             $response = [
@@ -58,7 +58,7 @@ class AuthController extends Controller
                 'token' => $token,
             ];
 
-            return response($request, 200);
+            return response($response, 200);
         }
     }
 
