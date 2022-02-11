@@ -2,12 +2,12 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Contracts\Pipeline\Hub;
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use NunoMaduro\Collision\Adapters\Phpunit\State;
+
 
 class UserSeeder extends Seeder
 {
